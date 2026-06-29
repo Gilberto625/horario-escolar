@@ -6,7 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import CORS_ORIGINS
-from app.database import Base, SessionLocal, engine
+from app.database import SessionLocal, engine
+from app.db_init import ensure_schema
 from app.routers import health, schedule, tasks
 from app.seeds.seed_schedule import seed_schedule
 
@@ -16,7 +17,7 @@ async def lifespan(_: FastAPI):
     if engine is None:
         raise RuntimeError("DATABASE_URL no está configurada")
 
-    Base.metadata.create_all(bind=engine)
+    ensure_schema()
 
     db = SessionLocal()
     try:
