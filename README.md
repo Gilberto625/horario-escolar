@@ -133,10 +133,12 @@ curl -X POST http://localhost:8000/api/v1/tasks/complete-by-criteria ^
 4. Render detectará `render.yaml` o configura manualmente:
    - **Build Command:** `pip install -r requirements.txt`
    - **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-5. Agrega variable de entorno:
+5. Agrega variables de entorno:
    - `DATABASE_URL` = connection string de Neon
    - `TIMEZONE` = `America/Mexico_City`
-6. Despliega y copia la URL pública, por ejemplo:
+   - **`PYTHON_VERSION` = `3.11.11`** (importante: evita Python 3.14 en build)
+6. El archivo `.python-version` también fija Python 3.11.11 si Render lo detecta.
+7. Despliega y copia la URL pública, por ejemplo:
    - `https://backend-horario-escolar.onrender.com`
 7. En la Lambda de Alexa configura:
    - `BACKEND_API_URL=https://backend-horario-escolar.onrender.com`
