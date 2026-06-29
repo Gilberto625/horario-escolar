@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: backend-horario-escolar
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: TIMEZONE
+        value: America/Mexico_City
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: PYTHON_VERSION
+        value: 3.11.11
